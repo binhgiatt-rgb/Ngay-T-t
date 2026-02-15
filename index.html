@@ -477,18 +477,20 @@ function adjustDay(v) {
 function setToday() { document.getElementById("solarDate").valueAsDate = new Date(); main(); }
 
 function main() {
-    let val = document.getElementById("solarDate").value; if(!val) return;
-    let d = new Date(val);
-    let lunar = getLunarDate(d.getDate(), d.getMonth()+1, d.getFullYear());
-    let jd = lunar.jd;
-    let dCan = CAN[(jd+9)%10], dChi = CHI[(jd+1)%12];
-    
+    // Chỉ đọc giá trị, KHÔNG dùng "new Date()" ở đây nữa
+    const ngayElement = document.getElementById('input-ngay');
+    const thangElement = document.getElementById('input-thang');
+    const namElement = document.getElementById('input-nam');
 
     if (!ngayElement || !thangElement || !namElement) return;
 
     let d = parseInt(ngayElement.value);
     let m = parseInt(thangElement.value);
     let y = parseInt(namElement.value);
+
+    // ... phần code tính toán phía sau giữ nguyên ...
+
+
 
     
     // Nguyên lý Trực dựa trên Tháng Tiết Khí
@@ -664,6 +666,7 @@ getEvaluation(gS, bS);
 </script>
 </body>
 </html>
+
 
 
 

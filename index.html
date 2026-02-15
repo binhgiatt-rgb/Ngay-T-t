@@ -101,43 +101,22 @@ document.onclick=reEnable
 </script>
 <script language="JavaScript">
     window.onload = function() {
-        document.addEventListener("contextmenu", function(e) {
-            e.preventDefault();
-        }, false);
-        document.addEventListener("keydown", function(e) {
-            //document.onkeydown = function(e) {
-            // "I" key
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-                disabledEvent(e);
-            }
-            // "J" key
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-                disabledEvent(e);
-            }
-            // "S" key + macOS
-            if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-                disabledEvent(e);
-            }
-            // "U" key
-            if (e.ctrlKey && e.keyCode == 85) {
-                disabledEvent(e);
-            }
-            // "F12" key
-            if (event.keyCode == 123) {
-                disabledEvent(e);
-            }
-        }, false);
- 
-        function disabledEvent(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            } else if (window.event) {
-                window.event.cancelBubble = true;
-            }
-            e.preventDefault();
-            return false;
-        }
-    };
+    // Lấy thời gian thực từ máy tính/điện thoại khách hàng
+    const today = new Date();
+    const d = today.getDate();
+    const m = today.getMonth() + 1;
+    const y = today.getFullYear();
+
+    // Cập nhật giá trị vào các ô nhập liệu trên giao diện
+    // (Hãy đảm bảo ID 'input-ngay', 'input-thang'... khớp với ID của bạn)
+    if(document.getElementById('input-ngay')) document.getElementById('input-ngay').value = d;
+    if(document.getElementById('input-thang')) document.getElementById('input-thang').value = m;
+    if(document.getElementById('input-nam')) document.getElementById('input-nam').value = y;
+
+    // Chạy hàm tính toán chính để hiện kết quả ngày hôm nay ngay lập tức
+    main(); 
+};
+
 </script>
 
 </head>

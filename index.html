@@ -101,20 +101,27 @@ document.onclick=reEnable
 </script>
 <script language="JavaScript">
     window.onload = function() {
-    // Lấy thời gian thực từ máy tính/điện thoại khách hàng
-    const today = new Date();
-    const d = today.getDate();
-    const m = today.getMonth() + 1;
-    const y = today.getFullYear();
+    // Lấy thời gian hiện tại theo múi giờ Việt Nam
+    const now = new Date();
+    const vnTime = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }).format(now);
 
-    // Cập nhật giá trị vào các ô nhập liệu trên giao diện
-    // (Hãy đảm bảo ID 'input-ngay', 'input-thang'... khớp với ID của bạn)
-    if(document.getElementById('input-ngay')) document.getElementById('input-ngay').value = d;
-    if(document.getElementById('input-thang')) document.getElementById('input-thang').value = m;
-    if(document.getElementById('input-nam')) document.getElementById('input-nam').value = y;
+    // Tách chuỗi "DD/MM/YYYY" thành các số riêng biệt
+    const [d, m, y] = vnTime.split('/');
 
-    // Chạy hàm tính toán chính để hiện kết quả ngày hôm nay ngay lập tức
-    main(); 
+    // Gán vào các ô nhập liệu (Đảm bảo ID 'input-ngay', 'input-thang'... là đúng)
+    if(document.getElementById('input-ngay')) document.getElementById('input-ngay').value = parseInt(d);
+    if(document.getElementById('input-thang')) document.getElementById('input-thang').value = parseInt(m);
+    if(document.getElementById('input-nam')) document.getElementById('input-nam').value = parseInt(y);
+
+    // Sau khi điền ngày xong, mới gọi hàm main để tính toán
+    if (typeof main === "function") {
+        main();
+    }
 };
 
 </script>
@@ -648,6 +655,7 @@ getEvaluation(gS, bS);
 </script>
 </body>
 </html>
+
 
 
 

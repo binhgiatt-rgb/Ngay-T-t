@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ngaytot.me">
+    <meta name="copyright" content="Copyright © 2026 Ngaytot.me">
+    <title>Ngaytot.me - Xem Ngày Tốt Xấu, Lịch Vạn Niên Ngọc Hạp Thông Thư</title>
+    
+    <meta name="description" content="Ngaytot.me - Tra cứu ngày tốt xấu, giờ hoàng đạo chuẩn Ngọc Hạp Thông Thư. Xem lịch vạn niên, hướng xuất hành và đánh giá ngày đại cát cho khai trương, cưới hỏi.">
+      <meta property="og:title" content="Ngaytot.me - Xem Ngày Tốt Chuẩn Phong Thủy">
+<meta property="og:description" content="Tra cứu lịch vạn niên, ngày tốt xấu nhanh chóng và chính xác.">
+<meta property="og:url" content="https://ngaytot.me">
+<meta property="og:type" content="website">  ```
+<meta property="og:title" content="Ngaytot.me - Xem Ngày Tốt Chuẩn Phong Thủy">
+<meta property="og:description" content="Tra cứu lịch vạn niên, ngày tốt xấu nhanh chóng và chính xác.">
+<meta property="og:url" content="https://ngaytot.me">
+<meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngọc Hạp Thông Thư - Giao Diện Việt Standard</title>
+    <style>
+        :root { --primary: #850000; --gold: #b8860b; --bg: #fdfaf6; --text: #333; --star-on: #ff9800; --star-off: #e0e0e0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f1ea; margin: 0; padding: 10px; color: var(--text); line-height: 1.4; }
+        .app-container { max-width: 1000px; margin: auto; background: var(--bg); border: 2px solid var(--gold); border-radius: 16px; padding: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.15); }
+        .header { text-align: center; border-bottom: 3px double var(--gold); margin-bottom: 20px; padding-bottom: 10px; }
+        .header h1 { color: var(--primary); text-transform: uppercase; margin: 0; font-size: 28px; letter-spacing: 1px; }
+        
+        /* Khu vực nhập liệu */
+        .control-area { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 5px; background: #fff3e0; padding: 6px; border-radius: 6px; border: 1px solid #ffe0b2; }
+        .date-input-wrapper { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        input[type="date"] { padding: 10px; border: 2px solid var(--gold); border-radius: 8px; font-size: 16px; outline: none; text-align: center; cursor: pointer; background: white; }
+        .nav-btn { background: var(--primary); color: white; border: none; padding: 10px 16px; cursor: pointer; font-weight: bold; border-radius: 8px; font-size: 18px; transition: 0.3s; }
+        .action-btn { background: var(--gold); color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; border-radius: 8px; text-transform: uppercase; font-size: 13px; }
+
+        /* Lịch Âm Dương Card */
+        .info-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; margin-bottom: 3px; }
+        .calendar-card { background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; padding-bottom: 15px; }
+        .cal-header { background: var(--primary); color: white; width: 100%; text-align: center; padding: 8px 0; font-weight: bold; font-size: 18px; text-transform: uppercase; }
+        .cal-solar-day { font-size: 40px; font-weight: 500; color: var(--primary); line-height: 1; margin: 8px 0 5px 0; }
+        .cal-solar-month-year { font-size: 18px; color: #555; margin-bottom: 15px; font-weight: 600; letter-spacing: 1px; }
+        
+        
+        .lunar-label { font-size: 12px; color: #b8860b; text-transform: uppercase; font-weight: bold; }
+        .lunar-value { font-size: 24px; font-weight: bold; color: #850000; }
+
+        /* Bát Tự Card */
+        .battu-card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 1px solid #eee; }
+        .battu-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 5px; }
+        .battu-item { background: #fdfaf6; border: 1px solid #f0e6d2; border-radius: 10px; padding: 10px; text-align: center; }
+        .battu-label { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        .battu-value { font-size: 17px; font-weight: bold; color: var(--primary); }
+        .nap-am { font-size: 10px; color: #666; margin-top: 2px; font-style: italic; }
+        
+        .tag-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; justify-content: center; }
+        .info-tag { padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid #ddd; }
+        .tag-truc { background: #e3f2fd; color: #0d47a1; }
+        .tag-tiet { background: #f1f8e9; color: #33691e; }
+        .tag-season { background: #fff3e0; color: #e65100; }
+
+        .day-status { font-weight: bold; font-size: 18px; padding: 10px; border-radius: 10px; text-align: center; width: 90%; margin: 0 auto; }
+        .hoang-dao-text { color: #e65100; background: #fff3e0; border: 1px solid #ffe0b2; }
+        .hac-dao-text { color: #424242; background: #eeeeee; border: 1px solid #bdbdbd; }
+
+        .zodiac-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 2px; }
+        .zodiac-item { background: white; border: 1px solid #ffe0b2; padding: 4px; border-radius: 6px; font-size: 11px; text-align: center; }
+
+        .rating-section { background: white; padding: 10px; border-radius: 15px; border: 1px solid #eee; margin-top: 10px; }
+        .general-rating { text-align: center; padding: 15px; background: #fffde7; border-radius: 12px; margin-bottom: 15px; border: 1px solid #fff59d; }
+        .rating-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 5px; }
+       
+        .stars { color: var(--star-on); font-size: 15px; letter-spacing: 1px; }
+        .star-off { color: var(--star-off); }
+
+        .sao-list { font-size: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 5px; }
+        .sao-box { background: #fff; padding: 10px; border-radius: 10px; border: 1px solid #eee; }
+
+        @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } }
+    </style>
+<style>
+body{
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
+</style><script type=”text/JavaScript”>
+function killCopy(e){
+return false
+}
+function reEnable(){
+return true
+}
+document.onselectstart=new Function (“return false”)
+if (window.sidebar){
+document.onmousedown=killCopy
+document.onclick=reEnable
+}
+</script>
+<script language="JavaScript">
+    window.onload = function() {
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+        document.addEventListener("keydown", function(e) {
+            //document.onkeydown = function(e) {
+            // "I" key
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                disabledEvent(e);
+            }
+            // "J" key
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                disabledEvent(e);
+            }
+            // "S" key + macOS
+            if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                disabledEvent(e);
+            }
+            // "U" key
+            if (e.ctrlKey && e.keyCode == 85) {
+                disabledEvent(e);
+            }
+            // "F12" key
+            if (event.keyCode == 123) {
+                disabledEvent(e);
+            }
+        }, false);
+ 
+        function disabledEvent(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
+            e.preventDefault();
+            return false;
+        }
+    };
+</script>
+
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header"><h1>XEM NGÀY TỐT XẤU - ĐỔI NGÀY ÂM DƯƠNG</h1></div>
+	<div <h2>***Bình - Giai - Thành*** dựa theo cuốn Ngọc Hạp Thông Thư, Lịch Vạn Niên</h2></div>
+    <div class="control-area">
+        <button class="nav-btn" onclick="adjustDay(-1)">❮</button>
+        <div class="date-input-wrapper">
+            <input type="date" id="solarDate" onchange="main()">
+            <span style="font-size: 10px; color: #551;">Chọn ngày cần xem (NGÀY/ THÁNG/ NĂM)</span>
+        </div>
+        <button class="nav-btn" onclick="adjustDay(1)">❯</button>
+        <button class="action-btn" onclick="setToday()">Hôm nay</button>
+    </div>
+
+    <div id="resultArea" style="display:none;">
+        <div class="info-grid">
+            <div class="calendar-card">
+                <div class="cal-header" id="outDayOfWeek">THỨ...</div>
+                <div class="cal-solar-day" id="outSolarDay">00</div>
+                <div class="cal-solar-month-year" id="outSolarMonthYear">00 / 00 / 0000</div>
+                
+                <div class="lunar-display">
+                    <div class="lunar-label">Lịch Âm</div>
+                    <div class="lunar-value" id="outLunar">00/00</div>
+                </div>
+
+                <div id="outDaySpirit" class="day-status"></div>
+            </div>
+
+            <div class="battu-card">
+           
+                
+                <div class="battu-grid">
+                    <div class="battu-item">
+                        <div class="battu-label">Năm</div>
+                        <div class="battu-value" id="outYearCC">...</div>
+                        <div class="nap-am" id="outYearNapAm">...</div>
+                    </div>
+                    <div class="battu-item">
+                        <div class="battu-label">Tháng</div>
+                        <div class="battu-value" id="outMonthCC">...</div>
+                    </div>
+                    <div class="battu-item">
+                        <div class="battu-label">Ngày</div>
+                        <div class="battu-value" id="outDayCC">...</div>
+                        <div class="nap-am" id="outDayNapAm">...</div>
+                    </div>
+                </div>
+
+                <div class="tag-row">
+                    <div class="info-tag tag-truc" id="outTruc">Trực: ...</div>
+                    <div class="info-tag tag-tiet" id="outTietKhi">Tiết: ...</div>
+                    <div class="info-tag tag-season" id="outSeason">Mùa: ...</div>
+                </div>
+
+                <div class="zodiac-container">
+                    <div style="font-size:12px; font-weight:bold; color:var(--gold);">Giờ Hoàng Đạo:</div>
+                    <div class="zodiac-grid" id="outZodiac"></div>
+                </div>
+            </div>
+        </div>
+        <div class="sao-list">
+            <div class="sao-box">
+                <h4 style="color:var(--star-on); font-size:13px; margin:0 0 8px 0; border-bottom:1px solid #f0f0f0;">✨ CÁT TINH</h4>
+                <div id="listGood"></div>
+            </div>
+            <div class="sao-box">
+                <h4 style="color:var(--primary); font-size:13px; margin:0 0 8px 0; border-bottom:1px solid #f0f0f0;">🌑 HUNG TINH</h4>
+                <div id="listBad"></div>
+            </div>
+        </div>
+
+        <div class="rating-section">
+            <div class="general-rating">
+                <div style="font-weight: bold; font-size: 15px; color: var(--primary);">ĐÁNH GIÁ CHUNG</div>
+                <div id="starGeneral" class="stars" style="font-size: 20px; margin: 5px 0;"></div>
+                <div id="txtGeneral" style="font-weight: 800; font-size: 16px; text-transform: uppercase;"></div>
+                <div id="adviceGeneral" style="font-size: 15px; color: #666; margin-top: 5px;"></div>
+                <div id="evaluation-box" style="padding: 15px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; text-align: center;">
+    </div>
+            </div>
+            <div class="rating-grid" id="jobRatings"></div>
+        </div>
+
+                
+        <div id="outDir" style="margin-top:10px; padding:5px; background:#fff; border-radius:15px; border:1px solid #eee; font-size:14px; text-align:center; line-height:1.6; box-shadow: 0 5px 15px rgba(0,0,0,0.05);"></div>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   BỘ LÕI THIÊN VĂN GỐC (GIỮ NGUYÊN)
+   ============================================================ */
+const CAN = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
+const CHI = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
+const TRUC_12 = ["Kiến", "Trừ", "Mãn", "Bình", "Định", "Chấp", "Phá", "Nguy", "Thành", "Thu", "Khai", "Bế"];
+const TIET_KHI_ARR = ["Xuân Phân","Thanh Minh","Cốc Vũ","Lập Hạ","Tiểu Mãn","Mang Chủng","Hạ Chí","Tiểu Thử","Đại Thử","Lập Thu","Xử Thử","Bạch Lộ","Thu Phân","Hàn Lộ","Sương Giáng","Lập Đông","Tiểu Tuyết","Đại Tuyết","Đông Chí","Tiểu Hàn","Đại Hàn","Lập Xuân","Vũ Thủy","Kinh Trập"];
+
+const NAP_AM_MAP = {
+    "Giáp Tý":"Hải Trung Kim","Ất Sửu":"Hải Trung Kim","Bính Dần":"Lư Trung Hỏa","Đinh Mão":"Lư Trung Hỏa","Mậu Thìn":"Đại Lâm Mộc","Kỷ Tỵ":"Đại Lâm Mộc","Canh Ngọ":"Lộ Bàng Thổ","Tân Mùi":"Lộ Bàng Thổ","Nhâm Thân":"Kiếm Phong Kim","Quý Dậu":"Kiếm Phong Kim","Giáp Tuất":"Sơn Đầu Hỏa","Ất Hợi":"Sơn Đầu Hỏa","Bính Tý":"Giản Hạ Thủy","Đinh Sửu":"Giản Hạ Thủy","Mậu Dần":"Thành Đầu Thổ","Kỷ Mão":"Thành Đầu Thổ","Canh Thìn":"Bạch Lạp Kim","Tân Tỵ":"Bạch Lạp Kim","Nhâm Ngọ":"Dương Liễu Mộc","Quý Mùi":"Dương Liễu Mộc","Giáp Thân":"Tuyền Trung Thủy","Ất Dậu":"Tuyền Trung Thủy","Bính Tuất":"Ốc Thượng Thổ","Đinh Hợi":"Ốc Thượng Thổ","Mậu Tý":"Tích Lịch Hỏa","Kỷ Sửu":"Tích Lịch Hỏa","Canh Dần":"Tùng Bách Mộc","Tân Mão":"Tùng Bách Mộc","Nhâm Thìn":"Trường Lưu Thủy","Quý Tỵ":"Trường Lưu Thủy","Giáp Ngọ":"Sa Trung Kim","Ất Mùi":"Sa Trung Kim","Bính Thân":"Sơn Hạ Hỏa","Đinh Dậu":"Sơn Hạ Hỏa","Mậu Tuất":"Bình Địa Mộc","Kỷ Hợi":"Bình Địa Mộc","Canh Tý":"Bích Thượng Thổ","Tân Sửu":"Bích Thượng Thổ","Nhâm Dần":"Kim Bạch Kim","Quý Mão":"Kim Bạch Kim","Giáp Thìn":"Phúc Đăng Hỏa","Ất Tỵ":"Phúc Đăng Hỏa","Bính Ngọ":"Thiên Hà Thủy","Đinh Mùi":"Thiên Hà Thủy","Mậu Thân":"Đại Trạch Thổ","Kỷ Dậu":"Đại Trạch Thổ","Canh Tuất":"Thoa Xuyến Kim","Tân Hợi":"Thoa Xuyến Kim","Nhâm Tý":"Tang Đố Mộc","Quý Sửu":"Tang Đố Mộc","Giáp Dần":"Đại Khê Thủy","Ất Mão":"Đại Khê Thủy","Bính Thìn":"Sa Trung Thổ","Đinh Tỵ":"Sa Trung Thổ","Mậu Ngọ":"Thiên Thượng Hỏa","Kỷ Mùi":"Thiên Thượng Hỏa","Canh Thân":"Thạch Lựu Mộc","Tân Dậu":"Thạch Lựu Mộc","Nhâm Tuất":"Đại Hải Thủy","Quý Hợi":"Đại Hải Thủy"
+};
+
+const STAR_DB = {
+    good: [
+        {n: "Thiên Xá**: Tốt tế tự, giải oan", c: "Tốt tế tự, giải oan", l: ["Mậtrungu","Mậu","Mậu","Giáp"," ","Giáp","Mậu","Mậu","Mậu","Giáp"," ","Giáp"]},
+        {n: "Đại An: Bình an-tài lộc", c: "Tốt. Mọi việc bình an, ổn định, cầu tài lộc thuận lợi.", isLucDieu: true, val: 1},
+        {n: "Thiên Xá**: Tốt tế tự, giải oan", c: "Tốt tế tự, giải oan", l: ["Dần","Dần","Dần","Ngtrungọ"," ","Ngọ","Thân","Thân","Thân","Tý"," ","Tý"]},
+        {n: "Nguyệt Không: Tốt làm nhà, làm giường", c: "Tốt làm nhà, làm giường", l: ["Nhâm","Canh","Bính","Giáp","Nhâm","Canh","Bính","Giáp","Nhâm","Canh","Bính","Giáp"]},
+        {n: "Thiên đức*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Đinh","Thân","Nhâm","Tân","Hợi","Giáp","Quý","Dần","Bính","Ất","Tỵ","Canh"]},
+        {n: "Thiên đức hợp**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Nhâm","Tý","Đinh","Bính","Dần","Kỷ","Mậu","Hợi","Tân","Canh","Thân","Ất"]},
+        {n: "Nguyệt Đức*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Bính","Giáp","Nhâm","Canh","Bính","Giáp","Nhâm","Canh","Bính","Giáp","Nhâm","Canh"]},
+        {n: "Nguyệt đức hợp**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Tân","Kỷ","Đinh","Ất","Tân","Kỷ","Đinh","Ất","Tân","Kỷ","Đinh","Ất"]},
+        {n: "Thiên hỷ*: Tốt cưới hỏi", c: "Tốt cưới hỏi", l: ["Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu"]},
+        {n: "Thiên phú: Tốt xây dựng, khai trương", c: "Tốt xây dựng, khai trương", l: ["Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão"]},
+        {n: "Thiên Quý**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Giáp","Giáp","Giáp","Bính","Bính","Bính","Canh","Canh","Canh","Nhâm","Nhâm","Nhâm"]},
+        {n: "Thiên Quý**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Ất","Ất","Ất","Đinh","Đinh","Đinh","Tân","Tân","Tân","Quý","Quý","Quý"]},
+        {n: "Sinh khí: Tốt làm nhà, động thổ", c: "Tốt làm nhà, động thổ", l: ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"]},
+        {n: "Thiên Phúc*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Kỷ","Mậu","Kỷ","Tân","Tân","Tân","Ất","Giáp","Ất","Đinh","Bính","Đinh"]},
+        {n: "Thiên Phúc*: Tốt mọi việc", c: "Tốt mọi việc", l: [" "," "," ","Quý","Nhâm"," "," "," "," "," "," "," "]},
+        {n: "Thiên thành**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ"]},
+        {n: "Thiên Quan:Tốt mọi việc", c: "Tốt mọi việc", l: ["Tuất","Tý","Dần","Thìn","Ngọ","Thân","Tuất","Tý","Dần","Thìn","Ngọ","Thân"]},
+        {n: "Thiên Mã: Tốt xuất hành, cầu tài", c: "Tốt xuất hành, cầu tài", l: ["Ngọ","Thân","Tuất","Tý","Dần","Thìn","Ngọ","Thân","Tuất","Tý","Dần","Thìn"]},
+        {n: "Thiên tài: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Thìn","Ngọ","Thân","Tuất","Tý","Dần","Thìn","Ngọ","Thân","Tuất","Tý","Dần"]},
+        {n: "Địa tài: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão"]},
+        {n: "Nguyệt Tài: Tốt cầu tài, giao dịch", c: "Tốt cầu tài, giao dịch", l: ["Ngọ","Tỵ","Tỵ","Mùi","Dậu","Hợi","Ngọ","Tỵ","Tỵ","Mùi","Dậu","Hợi"]},
+        {n: "Nguyệt Ân**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Bính","Đinh","Canh","Kỷ","Mậu","Tân","Nhâm","Quý","Canh","Ất","Giáp","Tân"]},
+        {n: "Minh tinh: Tốt mọi việc", c: "Tốt mọi việc", l: ["Thân","Tuất","Tý","Dần","Thìn","Ngọ","Thân","Tuất","Tý","Dần","Thìn","Ngọ"]},
+        {n: "Thánh tâm: Tốt cầu phúc, tế tự", c: "Tốt cầu phúc, tế tự", l: ["Hợi","Tỵ","Tý","Ngọ","Sửu","Mùi","Dần","Thân","Mão","Dậu","Thìn","Tuất"]},
+        {n: "Ngũ phú*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Hợi","Dần","Tỵ","Thân","Hợi","Dần","Tỵ","Thân","Hợi","Dần","Tỵ","Thân"]},
+        {n: "Lộc khố: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão"]},
+        {n: "Phúc Sinh*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Dậu","Mão","Tuất","Thìn","Hợi","Tỵ","Tý","Ngọ","Sửu","Mùi","Dần","Thân"]},
+        {n: "Cát Khánh*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Dậu","Dần","Hợi","Thìn","Sửu","Ngọ","Mão","Thân","Tỵ","Tuất","Mùi","Tý"]},
+        {n: "Âm Đức: Tốt mọi việc", c: "Tốt mọi việc", l: ["Dậu","Mùi","Tỵ","Mão","Sửu","Hợi","Dậu","Mùi","Tỵ","Mão","Sửu","Hợi"]},
+        {n: "U Vi tinh: Tốt mọi việc", c: "Tốt mọi việc", l: ["Hợi","Thìn","Sửu","Ngọ","Mão","Thân","Tỵ","Tuất","Mùi","Tý","Dậu","Dần"]},
+        {n: "Mãn đức tinh: Tốt mọi việc", c: "Tốt mọi việc", l: ["Dần","Mùi","Thìn","Dậu","Ngọ","Hợi","Thân","Sửu","Tuất","Mão","Tý","Tỵ"]},
+        {n: "Kính Tâm: Tốt đối với tang lễ", c: "Tốt đối với tang lễ", l: ["Mùi","Sửu","Thân","Dần","Dậu","Mão","Tuất","Thìn","Hợi","Tỵ","Tý","Ngọ"]},
+        {n: "Tuế hợp: Tốt mọi việc", c: "Tốt mọi việc", l: ["Sửu","Tý","Hợi","Tuất","Dậu","Thân","Mùi","Ngọ","Tỵ","Thìn","Mão","Dần"]},
+        {n: "Nguyệt giải: Tốt mọi việc", c: "Tốt mọi việc", l: ["Thân","Thân","Dậu","Dậu","Tuất","Tuất","Hợi","Hợi","Ngọ","Ngọ","Mùi","Mùi"]},
+        {n: "Quan nhật: Tốt mọi việc", c: "Tốt mọi việc", l: ["", "Mão", "", "", "Ngọ", "", "", "Dậu", "", "", "Tý", ""]},
+        {n: "Hoạt điệu: Tốt (trừ Thụ Tử)", c: "Tốt (trừ Thụ Tử)", l: ["Tỵ","Tuất","Mùi","Tý","Dậu","Dần","Hợi","Thìn","Sửu","Ngọ","Mão","Thân"]},
+        {n: "Giải thần: Tốt tế tự, giải oan", c: "Tốt tế tự, giải oan", l: ["Thân","Thân","Tuất","Tuất","Tý","Tý","Dần","Dần","Thìn","Thìn","Ngọ","Ngọ"]},
+        {n: "Phổ hộ: Tốt làm phúc, giá thú", c: "Tốt làm phúc, giá thú", l: ["Thân","Dần","Dậu","Mão","Tuất","Thìn","Hợi","Tỵ","Tý","Ngọ","Sửu","Mùi"]},
+        {n: "Ích Hậu: Tốt mọi việc, giá thú", c: "Tốt mọi việc, giá thú", l: ["Tý","Ngọ","Sửu","Mùi","Dần","Thân","Mão","Dậu","Thìn","Tuất","Tỵ","Hợi"]},
+        {n: "Tục Thế: Tốt mọi việc, giá thú", c: "Tốt mọi việc, nhất là giá thú", l: ["Sửu","Mùi","Dần","Thân","Mão","Dậu","Thìn","Tuất","Tỵ","Hợi","Ngọ","Tý"]},
+        {n: "Yếu yên**: Tốt mọi việc, giá thú", c: "Tốt mọi việc, nhất là giá thú", l: ["Dần","Thân","Mão","Dậu","Thìn","Tuất","Tỵ","Hợi","Ngọ","Tý","Mùi","Sửu"]},
+        {n: "Dịch Mã: Tốt xuất hành", c: "Tốt xuất hành", l: ["Thân","Tỵ","Dần","Hợi","Thân","Tỵ","Dần","Hợi","Thân","Tỵ","Dần","Hợi"]},
+        {n: "Tam Hợp**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ"]},
+        {n: "Tam Hợp**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu"]},
+        {n: "Lục Hợp*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Hợi","Tuất","Dậu","Thân","Mùi","Ngọ","Tỵ","Thìn","Mão","Dần","Sửu","Tý"]},
+        {n: "Mẫu Thương*: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Hợi","Hợi","Hợi","Dần","Dần","Dần","Thìn","Thìn","Thìn","Thân","Thân","Thân"]},
+        {n: "Mẫu Thương*: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Tý","Tý","Tý","Mão","Mão","Mão","Sửu","Sửu","Sửu","Dậu","Dậu","Dậu"]},
+        {n: "Phúc hậu: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Dần","Dần","Dần","Tỵ","Tỵ","Tỵ","Thân","Thân","Thân","Hợi","Hợi","Hợi"]},
+        {n: "Đại Hồng Sa: Tốt mọi việc", c: "Tốt mọi việc", l: ["Tý","Tý","Tý","Thìn","Thìn","Thìn","Ngọ","Ngọ","Ngọ","Thân","Thân","Thân"]},
+        {n: "Đại Hồng Sa: Tốt mọi việc", c: "Tốt mọi việc", l: ["Sửu","Sửu","Sửu","Tỵ","Tỵ","Tỵ","Mùi","Mùi","Mùi","Tuất","Tuất","Tuất"]},
+        {n: "Dân nhật thời đức: Tốt mọi việc", c: "Tốt mọi việc", l: ["Ngọ","Ngọ","Ngọ","Dậu","Dậu","Dậu","Tý","Tý","Tý","Mão","Mão","Mão"]},
+        {n: "Hoàng Ân**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Tuất","Sửu","Dần","Tỵ","Dậu","Mão","Tý","Ngọ","Hợi","Thìn","Thân","Mùi"]},
+        {n: "Thanh Long*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Tý","Dần","Thìn","Ngọ","Thân","Tuất","Tý","Dần","Thìn","Ngọ","Thân","Tuất"]},
+        {n: "Minh đường*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi"]},
+        {n: "Kim đường*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão"]},
+        {n: "Ngọc đường*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ"]},
+{
+    n: "Tốc Hỷ: Tin vui, cầu tài lộc",
+    c: "Tốt. Tin vui đến nhanh, cầu tài lộc, gặp gỡ đối tác thuận lợi (buổi sáng tốt hơn).",
+    isLucDieu: true,
+    val: 3 // Vị trí số 3
+},
+{
+    n: "Tiểu Cát: May mắn nhỏ, việc trôi chảy",
+    c: "Tốt. Gặp may mắn nhỏ, mọi việc trôi chảy, có quý nhân phù trợ.",
+    isLucDieu: true,
+    val: 5 // Vị trí số 5
+},
+    ],
+   bad: [
+    {
+        n: "Trùng tang**: Rất xấu với an táng, mai táng, hôn thú, giá thú, khởi công",
+        c: "Cực xấu. Với an táng, mai táng, hôn thú, giá thú, khởi công", l: ["Giáp","Ất","Kỷ","Bính","Đinh","Kỷ","Canh","Tân","Kỷ","Nhâm","Quý","Kỷ"]},
+         
+   
+// các sao khác....
+        {n: "Nguyệt kỵ*: Khó khăn, xấu mọi việc", dFixed: [5, 14, 23]},
+        {n: "Tam nương*: Xấu mọi việc, khó thành", dFixed: [3, 7, 13, 18, 22, 27]},
+        {n: "Thiên Cương**: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tý","Mùi","Dần","Dậu","Thìn","Hợi","Ngọ","Sửu","Thân","Mão","Tuất"]},
+{
+    n: "Dương Công Kỵ**: Xấu mọi việc, khởi công, khai trương",
+    c: "Cực xấu. Ngày hung nhất trong tháng, tránh khởi sự mọi việc đại sự.", l: [[13], [11], [9], [7], [5], [3], [8, 29], [27], [25], [23], [21], [19]]
+},
+{
+    n: "Đại Không Vong: Xấu mọi việc, hao tán tài",
+    c: "Xấu. Gặp nhiều trở ngại, mưu sự khó thành, dễ bị hao tán tài lộc.",
+    l: ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"]
+},
+    {
+    n: "Không Vong (Sát)*", 
+    c: "Xấu mọi việc, mưu sự khó thành.",
+    isLucDieu: true,
+    val: 6 // Vị trí cuối cùng trong vòng Lục Diệu
+}, 
+{
+    n: "Xích Khẩu*: Dễ tranh cãi, thị phi",
+    c: "Xấu. Dễ xảy ra tranh cãi, miệng tiếng, thị phi, đề phòng mâu thuẫn.",
+    isLucDieu: true, // Đánh dấu để dùng hàm tính riêng
+    val: 4 // Vị trí số 4 trong vòng Lục Diệu
+},
+{
+    n: "Lưu Niên: Xấu mọi việc, trì hoãn",
+    c: "Xấu. Mọi việc dễ bị trì hoãn, dây dưa, khó dứt điểm, nên kiên nhẫn.",
+    isLucDieu: true,
+    val: 2 // Vị trí số 2
+},
+        {n: "Thiên Lại: Xấu mọi việc", c: "Xấu mọi việc", l: ["Dậu","Ngọ","Mão","Tý","Dậu","Ngọ","Mão","Tý","Dậu","Ngọ","Mão","Tý"]},
+        {n: "Thiên Ngục: Xấu mọi việc (Lợp nhà)", c: "Xấu mọi việc (Lợp nhà)", l: ["Tý","Mão","Ngọ","Dậu","Tý","Mão","Ngọ","Dậu","Tý","Mão","Ngọ","Dậu"]},
+        {n: "Tiểu Hồng Sa: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Dậu","Sửu","Tỵ","Dậu","Sửu","Tỵ","Dậu","Sửu","Tỵ","Dậu","Sửu"]},
+        {n: "Đại Hao**: Xấu mọi việc, hao tiền", c: "Xấu mọi việc", l: ["Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ"]},
+        {n: "Tiểu Hao: Xấu kinh doanh, cầu tài", c: "Xấu kinh doanh, cầu tài", l: ["Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn"]},
+        {n: "Nguyệt phá*: Xấu xây dựng", c: "Xấu xây dựng", l: ["Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi"]},
+        {n: "Nguyệt phá*: Xấu xây dựng", c: "Xấu xây dựng", l: ["","Tuất","","","Sửu","","","Thìn","","","Mùi",""]},
+        {n: "Kiếp sát**: Kỵ xuất hành, giá thú", c: "Kỵ xuất hành, giá thú", l: ["Hợi","Thân","Tỵ","Dần","Hợi","Thân","Tỵ","Dần","Hợi","Thân","Tỵ","Dần"]},
+        {n: "Địa phá: Kỵ xây dựng, động thổ", c: "Kỵ xây dựng", l: ["Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất"]},
+        {n: "Thổ phủ: Kỵ xây dựng, động thổ", c: "Kỵ xây dựng, động thổ", l: ["Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu"]},
+        {n: "Thổ ôn: Kỵ xây dựng, đào ao", c: "Kỵ xây dựng, đào ao", l: ["Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão"]},
+        {n: "Thiên ôn: Kỵ xây dựng", c: "Kỵ xây dựng", l: ["Mùi","Tuất","Thìn","Dần","Ngọ","Tý","Dậu","Thân","Tỵ","Hợi","Tý","Sửu"]},
+        {n: "Thụ tử**: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tuất","Thìn","Hợi","Tỵ","Tý","Ngọ","Sửu","Mùi","Dần","Thân","Mão","Dậu"]},
+        {n: "Hoang vu*: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tỵ","Tỵ","Thân","Thân","Thân","Hợi","Hợi","Hợi","Dần","Dần","Dần"]},
+        {n: "Hoang vu*: Xấu mọi việc", c: "Xấu mọi việc", l: ["Dậu","Dậu","Dậu","Tý","Tý","Tý","Mão","Mão","Mão","Ngọ","Ngọ","Ngọ"]},
+        {n: "Hoang vu*: Xấu mọi việc", c: "Xấu mọi việc", l: ["Sửu","Sửu","Sửu","Thìn","Thìn","Thìn","Mùi","Mùi","Mùi","Tuất","Tuất","Tuất"]},
+        {n: "Thiên tặc: Xấu khởi tạo, động thổ", c: "Xấu khởi tạo, động thổ", l: ["Thìn","Dậu","Dần","Mùi","Tý","Tỵ","Tuất","Mão","Thân","Sửu","Ngọ","Hợi"]},
+        {n: "Địa Tặc: Xấu khởi tạo, an táng", c: "Xấu khởi tạo, an táng", l: ["Sửu","Tý","Hợi","Tuất","Dậu","Thân","Mùi","Ngọ","Tỵ","Thìn","Mão","Dần"]},
+        {n: "Hoả tai: Xấu làm nhà, lợp nhà", c: "Xấu làm nhà, lợp nhà", l: ["Sửu","Mùi","Dần","Thân","Mão","Dậu","Thìn","Tuất","Tỵ","Hợi","Ngọ","Tý"]},
+        {n: "Nguyệt Hỏa: Xấu lợp nhà, làm bếp", c: "Xấu lợp nhà, làm bếp", l: ["Tỵ","Thìn","Mão","Dần","Sửu","Tý","Hợi","Tuất","Dậu","Thân","Mùi","Ngọ"]},
+        {n: "Nguyệt Yếm: Xấu xuất hành, giá thú", c: "Xấu xuất hành, giá thú", l: ["Tuất","Dậu","Thân","Mùi","Ngọ","Tỵ","Thìn","Mão","Dần","Sửu","Tý","Hợi"]},
+        {n: "Nguyệt Hư: Xấu giá thú, khai trương", c: "Xấu giá thú, mở hàng", l: ["Sửu","Tuất","Mùi","Thìn","Sửu","Tuất","Mùi","Thìn","Sửu","Tuất","Mùi","Thìn"]},
+        {n: "Hoàng Sa: Xấu xuất hành", c: "Xấu xuất hành", l: ["Ngọ","Dần","Tý","Ngọ","Dần","Tý","Ngọ","Dần","Tý","Ngọ","Dần","Tý"]},
+        {n: "Lục Bất thành: Xấu xây dựng", c: "Xấu xây dựng", l: ["Dần","Ngọ","Tuất","Tỵ","Dậu","Sửu","Thân","Tý","Thìn","Hợi","Mão","Mùi"]},
+        {n: "Nhân Cách: Xấu giá thú, khởi tạo", c: "Xấu giá thú, khởi tạo", l: ["Dậu","Mùi","Tỵ","Mão","Sửu","Hợi","Dậu","Mùi","Tỵ","Mão","Sửu","Hợi"]},
+        {n: "Thần cách: Kỵ tế tự", c: "Kỵ tế tự", l: ["Tỵ","Mão","Sửu","Hợi","Dậu","Mùi","Tỵ","Mão","Sửu","Hợi","Dậu","Mùi"]},
+        {n: "Phi Ma sát: Kỵ giá thú, nhập trạch", c: "Kỵ giá thú, nhập trạch", l: ["Tý","Dậu","Ngọ","Mão","Tý","Dậu","Ngọ","Mão","Tý","Dậu","Ngọ","Mão"]},
+        {n: "Ngũ Quỹ: Kỵ xuất hành", c: "Kỵ xuất hành", l: ["Ngọ","Dần","Thìn","Dậu","Mão","Thân","Sửu","Tỵ","Tý","Hợi","Mùi","Tuất"]},
+        {n: "Băng tiêu: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tý","Sửu","Dần","Mão","Tuất","Hợi","Ngọ","Mùi","Thân","Dậu","Thìn"]},
+        {n: "Hà khôi: Kỵ khởi công", c: "Kỵ khởi công", l: ["Hợi","Ngọ","Sửu","Thân","Mão","Tuất","Tỵ","Tý","Mùi","Dần","Dậu","Thìn"]},
+        {n: "Vãng vong: Kỵ xuất hành, giá thú", c: "Kỵ xuất hành, giá thú", l: ["Dần","Tỵ","Thân","Hợi","Mão","Ngọ","Dậu","Tý","Thìn","Mùi","Tuất","Sửu"]},
+        {n: "Cửu không: Kỵ xuất hành, cầu tài", c: "Kỵ xuất hành, cầu tài", l: ["Thìn","Sửu","Tuất","Mùi","Mão","Tý","Dậu","Ngọ","Dần","Hợi","Thân","Tỵ"]},
+        {n: "Trùng phục: Kỵ giá thú, an táng", c: "Kỵ giá thú, an táng", l: ["Canh","Tân","Kỷ","Nhâm","Quý","Mậu","Giáp","Ất","Kỷ","Nhâm","Quý","Kỷ"]},
+        {n: "Chu tước: Kỵ nhập trạch, khai trương", c: "Kỵ nhập trạch, khai trương", l: ["Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu"]},
+        {n: "Bạch hổ: Kỵ mai táng", c: "Kỵ mai táng", l: ["Ngọ","Thân","Tuất","Tý","Dần","Thìn","Ngọ","Thân","Tuất","Tý","Dần","Thìn"]},
+        {n: "Huyền Vũ: Kỵ mai táng", c: "Kỵ mai táng", l: ["Dậu","Hợi","Tỵ","Mão","Sửu","Mùi","Dậu","Hợi","Tỵ","Mão","Sửu","Mùi"]},
+        {n: "Câu Trận: Kỵ mai táng", c: "Kỵ mai táng", l: ["Hợi","Tỵ","Mão","Sửu","Mùi","Dậu","Hợi","Tỵ","Mão","Sửu","Mùi","Dậu"]},
+        {n: "Lôi công: Xấu xây dựng", c: "Xấu xây dựng", l: ["Dần","Hợi","Tỵ","Thân","Dần","Hợi","Tỵ","Thân","Dần","Hợi","Tỵ","Thân"]},
+        {n: "Cô thần: Xấu với giá thú", c: "Xấu với giá thú", l: ["Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu"]},
+        {n: "Quả tú: Xấu với giá thú", c: "Xấu với giá thú", l: ["Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão"]},
+        {n: "Sát chủ**: Xấu mọi việc, chủ", c: "Xấu mọi việc", l: ["Tỵ","Tý","Mùi","Mão","Thân","Tuất","Sửu","Hợi","Ngọ","Dậu","Dần","Thìn"]},
+        {n: "Nguyệt Hình: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tý","Thìn","Thân","Ngọ","Sửu","Dần","Dậu","Mùi","Hợi","Mão","Tuất"]},
+        {n: "Tội chỉ: Xấu với tế tự, tố tụng", c: "Xấu với tế tự, kiện cáo", l: ["Ngọ","Tý","Mùi","Sửu","Thân","Dần","Dậu","Mão","Tuất","Thìn","Hợi","Tỵ"]},
+        {n: "Nguyệt Kiến: Kỵ động thổ", c: "Kỵ động thổ", l: ["Mão", "", "", "Ngọ", "", "", "Dậu", "", "", "Tý", "", ""]},
+        {n: "Thiên địa chính chuyển: Kỵ động thổ", c: "Kỵ động thổ", l: ["Quý Mão", "", "", "Bính Ngọ", "", "", "Đinh Dậu", "", "", "Canh Tý", "", ""]},
+        {n: "Thiên địa chuyển sát: Kỵ động thổ", c: "Kỵ động thổ", l: ["Ất Mão", "", "", "Bính Ngọ", "", "", "Tân Dậu", "", "", "Nhâm Tý", "", ""]},
+        {n: "Lỗ ban sát: Kỵ khởi tạo", c: "Kỵ khởi tạo", l: ["Tý", "", "", "Mão", "", "", "Ngọ", "", "", "Dậu", "", ""]},
+        {n: "Phủ đầu sát: Kỵ khởi tạo", c: "Kỵ khởi tạo", l: ["Thìn", "", "", "Mùi", "", "", "Dậu", "", "", "Tý", "", ""]},
+        {n: "Tam tang: Kỵ khởi tạo, giá thú", c: "Kỵ khởi tạo, giá thú", l: ["Thìn", "", "", "Mùi", "", "", "Tuất", "", "", "Sửu", "", ""]},
+        {n: "Ngũ hư: Kỵ khởi tạo, giá thú", c: "Kỵ khởi tạo, giá thú", l: ["Tỵ", "Dậu", "Sửu", "Thân", "Tý", "Thìn", "Hợi", "Mão", "Mùi", "Dần", "Ngọ", "Tuất"]},
+        {n: "Tứ thời đại mộ: Kỵ an táng", c: "Kỵ an táng", l: ["Ất Mùi", "", "", "Bính Tuất", "", "", "Tân Sửu", "", "", "Nhâm Thìn", "", ""]},
+        {n: "Thổ cẩm: Kỵ xây dựng, an táng", c: "Kỵ xây dựng, an táng", l: ["Hợi", "", "", "Dần", "", "", "Tỵ", "", "", "Thân", "", ""]},
+        {n: "Ly sàng: Kỵ giá thú", c: "Kỵ giá thú", l: ["Dậu", "", "", "Dần", "", "", "Tuất", "", "", "Tỵ", "", ""]},
+        {n: "Ly sàng: Kỵ giá thú", c: "Kỵ giá thú", l: ["", "", "", "Ngọ", "", "", "", "", "", "", "", ""]},
+        {n: "Tứ thời cô quả: Kỵ giá thú", c: "Kỵ giá thú", l: ["Sửu", "", "", "Thìn", "", "", "Mùi", "", "", "Tuất", "", ""]},
+        {n: "Không phòng: Kỵ giá thú", c: "Kỵ giá thú", l: ["Thìn", "Tỵ", "Tý", "Tuất", "Hợi", "Mùi", "Dần", "Mão", "Ngọ", "Thân", "Dậu", "Sửu"]},
+        {n: "Âm thác: Kỵ xuất hành, giá thú", c: "Kỵ xuất hành, giá thú", l: ["Canh Tuất", "Tân Dậu", "Canh Thân", "Đinh Mùi", "Bính Ngọ", "Đinh Tỵ", "Giáp Thìn", "Ất Mão", "Giáp Dần", "Quý Sửu", "Nhâm Tý", ""]},
+        {n: "Dương thác: Kỵ xuất hành, giá thú", c: "Kỵ xuất hành, giá thú", l: ["Giáp Dần", "Ất Mão", "Giáp Thìn", "Đinh Tỵ", "Bính Ngọ", "Đinh Mùi", "Canh Thân", "Tân Dậu", "Canh Tuất", "Quý Hợi", "Nhâm Tý", ""]},
+        {n: "Quỷ khóc: Kỵ xuất hành, giá thú", c: "Xấu với tế tự, mai táng", l: ["Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất", "Tuất"]},
+    ]
+};
+
+const JOB_LIST = [{n: "Làm nhà, sửa nhà", goodT: ["Kiến","Định","Thành"], badT: ["Phá","Bế"], critS: ["Sát chủ","Thụ tử"]},{n: "Khai trương", goodT: ["Mãn","Khai","Thành"], badT: ["Chấp","Bế"], critS: ["Đại Hao"]},{n: "Hôn thú, giá thú", goodT: ["Thành","Nguy"], badT: ["Kiến","Phá"], critS: ["Thụ tử"]},{n: "Nhập trạch", goodT: ["Khai","Định"], badT: ["Bế"], critS: []},{n: "Tế tự, tế lễ", goodT: ["Định","Chấp"], badT: ["Phá"], critS: []},{n: "Động thổ", goodT: ["Kiến","Định"], badT: ["Phá","Bế"], critS: ["Sát chủ"]},{n: "Xuất hành", goodT: ["Khai","Thu"], badT: ["Bế"], critS: []},{n: "Giao dịch, ký kết", goodT: ["Mãn","Thành"], badT: ["Thu"], critS: ["Đại Hao"]},{n: "Khai nghiệp mới", goodT: ["Thành","Khai"], badT: ["Bế"], critS: []},{n: "Cầu tài, lộc", goodT: ["Mãn","Thành"], badT: ["Bế"], critS: ["Đại Hao"]},{n: "An táng", goodT: ["Chấp","Phá"], badT: ["Kiến"], critS: []},{n: "Tố tụng", goodT: ["Trừ","Phá"], badT: ["Định"], critS: []},{n: "Làm việc thiện", goodT: ["Định","Thành","Khai"], badT: [], critS: []},{n: "Cầu tự", goodT: ["Định","Thành"], badT: ["Phá"], critS: []}];
+
+const PI = Math.PI;
+function floor(x) { return Math.floor(x); }
+function jdn(dd, mm, yy) {
+    let a = floor((14 - mm) / 12); let y = yy + 4800 - a; let m = mm + 12 * a - 3;
+    return dd + floor((153 * m + 2) / 5) + 365 * y + floor(y / 4) - floor(y / 100) + floor(y / 400) - 32045;
+}
+function getNewMoonDay(k, timeZone) {
+    let T = k / 1236.85; let Jd1 = 2415020.75933 + 29.53058868 * k + 0.0001178 * T * T - 0.000000155 * T * T * T;
+    let dr = PI/180;
+    let C1 = (0.1734 - 0.000393 * T) * Math.sin((359.2242 + 29.10535608 * k) * dr);
+    let C2 = -0.4068 * Math.sin((306.0253 + 385.81691806 * k) * dr);
+    return floor(Jd1 + C1 + C2 + 0.5 + timeZone / 24);
+}
+function getSunLongitude(dayNumber, timeZone) {
+    let T = (dayNumber - 2451545.0 - timeZone / 24) / 36525;
+    let L0 = 280.46645 + 36000.76983 * T; let M = (357.52910 + 35999.05030 * T) * PI / 180;
+    return (L0 + 1.914600 * Math.sin(M)) * PI / 180;
+}
+function getLunarMonth11(yyyy, timeZone) {
+    let off = jdn(31, 12, yyyy) - 2415021; let k = floor(off / 29.530588853);
+    for (let i = -2; i <= 1; i++) {
+        let nm = getNewMoonDay(k + i, timeZone); let nextNm = getNewMoonDay(k + i + 1, timeZone);
+        let s1 = (getSunLongitude(nm, timeZone) * 180 / PI % 360 + 360) % 360;
+        let s2 = (getSunLongitude(nextNm, timeZone) * 180 / PI % 360 + 360) % 360;
+        if (s2 < s1) s2 += 360;
+        if ((s1 <= 270 && s2 > 270) || (s1 <= 630 && s2 > 630)) return nm;
+    }
+    return getNewMoonDay(k, timeZone);
+}
+function getLunarDate(dd, mm, yyyy) {
+    let jd = jdn(dd, mm, yyyy); let k = floor((jd - 2415021) / 29.530588853);
+    let monthStart = getNewMoonDay(k+1, 7.0); if(monthStart > jd) monthStart = getNewMoonDay(k, 7.0);
+    let off = (jd >= getLunarMonth11(yyyy, 7.0)) ? getLunarMonth11(yyyy, 7.0) : getLunarMonth11(yyyy-1, 7.0);
+    let lMonthIdx = floor((monthStart - off) / 29);
+    let finalM = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10][lMonthIdx % 12];
+    return { d: jd - monthStart + 1, m: finalM, y: (finalM >= 11 && lMonthIdx < 5)?yyyy-1:yyyy, jd: jd };
+}
+
+/* ============================================================
+   LOGIC HỶ THẦN & TÀI THẦN (ẤT: ĐB, NAM)
+   ============================================================ */
+function getXuatHanh(dCan) {
+    const hy = {"Giáp":"Đông Bắc","Ất":"Đông Bắc","Bính":"Tây Nam","Đinh":"Chính Nam","Mậu":"Đông Nam","Kỷ":"Đông Bắc","Canh":"Tây Bắc","Tân":"Tây Nam","Nhâm":"Chính Nam","Quý":"Đông Nam"};
+    const tai = {"Giáp":"Đông Nam","Ất":"Chính Nam","Bính":"Chính Đông","Đinh":"Chính Đông","Mậu":"Chính Bắc","Kỷ":"Chính Nam","Canh":"Tây Nam","Tân":"Tây Nam","Nhâm":"Tây Bắc","Quý":"Tây Bắc"};
+    return { hy: hy[dCan], tai: tai[dCan] };
+}
+
+function calculateStarsScore(job, dayInfo) {
+    let score = 3; 
+    if(dayInfo.isHD) score += 1; else score -= 1;
+    if(job.goodT.includes(dayInfo.truc)) score += 1;
+    if(job.badT.includes(dayInfo.truc)) score -= 2;
+    dayInfo.badS.forEach(s => { if(job.critS.includes(s)) score -= 3; else score -= 0.5; });
+    dayInfo.goodS.forEach(s => { score += 0.5; });
+    return Math.min(6, Math.max(0, Math.round(score)));
+}
+
+function renderStars(count) {
+    let html = "";
+    for(let i=1; i<=6; i++) html += (i <= count) ? "★" : "<span class='star-off'>★</span>";
+    return html;
+}
+
+/* ============================================================
+   HÀM ĐIỀU KHIỂN CHÍNH
+   ============================================================ */
+function adjustDay(v) {
+    let d = new Date(document.getElementById("solarDate").value || new Date());
+    d.setDate(d.getDate() + v);
+    document.getElementById("solarDate").valueAsDate = d; main();
+}
+function setToday() { document.getElementById("solarDate").valueAsDate = new Date(); main(); }
+
+function main() {
+    let val = document.getElementById("solarDate").value; if(!val) return;
+    let d = new Date(val);
+    let lunar = getLunarDate(d.getDate(), d.getMonth()+1, d.getFullYear());
+    let jd = lunar.jd;
+    let dCan = CAN[(jd+9)%10], dChi = CHI[(jd+1)%12];
+    
+    // Nguyên lý Trực dựa trên Tháng Tiết Khí
+    let sunLong = getSunLongitude(jd + 0.5, 7.0);
+    let sunDeg = (sunLong * 180 / PI % 360 + 360) % 360;
+    let solarMonthIdx = floor(((sunDeg + 45) % 360) / 30); 
+    let trucIdx = (CHI.indexOf(dChi) - ((solarMonthIdx + 2) % 12) + 12) % 12;
+    let trucName = TRUC_12[trucIdx];
+
+    // Mùa & Tiết khí
+    let season = ["Mùa Xuân","Mùa Hạ","Mùa Thu","Mùa Đông"][floor((lunar.m-1)/3)];
+    let yearCC = CAN[(lunar.y+6)%10] + " " + CHI[(lunar.y+8)%12];
+    let dayCC = dCan + " " + dChi;
+
+    // Hoàng Đạo / Hắc Đạo
+    const startChiM = { 1: 0, 2: 2, 3: 4, 4: 6, 5: 8, 6: 10, 7: 0, 8: 2, 9: 4, 10: 6, 11: 8, 12: 10 };
+    let thanIdx = (CHI.indexOf(dChi) - startChiM[lunar.m] + 12) % 12;
+    let isHD = [0,1,4,5,7,10].includes(thanIdx);
+
+    // 6. LỌC SAO (Cập nhật cho cả sao Can Chi và sao Ngày cố định)
+    let gS = [], bS = [];
+    
+    // Hàm kiểm tra điều kiện hiện sao
+ function checkStar(s) {
+    // 1. Xử lý Lục Diệu (Đại An, Lưu Niên, Tốc Hỷ, Xích Khẩu, Tiểu Cát, Không Vong)
+    if (s.isLucDieu) {
+        // Công thức mới: (Tháng + Ngày - 1) chia 6 lấy dư
+        let lucDieuVal = (lunar.m + lunar.d - 1) % 6;
+        if (lucDieuVal === 0) lucDieuVal = 6; 
+        return lucDieuVal === s.val;
+    }
+    
+    // ... các phần logic phía dưới (dFixed, s.l) giữ nguyên ...
+
+
+    // 2. Xử lý sao có thuộc tính dFixed (Tam nương, Nguyệt kỵ kiểu cũ)
+    if (s.dFixed) {
+        return s.dFixed.includes(lunar.d);
+    }
+
+    // 3. Xử lý sao có thuộc tính l (Mảng theo 12 tháng)
+    if (s.l && s.l[lunar.m - 1]) {
+        const condition = s.l[lunar.m - 1];
+
+        // Trường hợp Trùng Tang, Dương Công Kỵ (Mảng các ngày: [7, 19])
+        if (Array.isArray(condition)) {
+            return condition.includes(lunar.d);
+        }
+
+        // Trường hợp sao Can Chi (Chuỗi: "Tý" hoặc "Giáp|Ất")
+        return condition.includes(dCan) || condition.includes(dChi);
+    // Đoạn này đặt ngay sau khi bạn đã có danh sách gS và bS
+    const evalBox = document.getElementById("evaluation-box");
+    
+    if (gS.length > 0 || bS.length > 0) {
+        evalBox.style.display = "block"; // Hiện khung lên khi có sao
+        
+        // Gọi hàm đánh giá mà tôi đã hướng dẫn ở bước trước
+        getEvaluation(gS, bS); 
+    } else {
+        evalBox.style.display = "none";
+    }}
+
+    return false;
+}
+
+    STAR_DB.good.forEach(s => { if(checkStar(s)) gS.push(s.n); });
+    STAR_DB.bad.forEach(s => { if(checkStar(s)) bS.push(s.n); });
+
+    // HIỂN THỊ UI
+    document.getElementById("resultArea").style.display = "block";
+    const weekdays = ["CHỦ NHẬT", "THỨ HAI", "THỨ BA", "THỨ TƯ", "THỨ NĂM", "THỨ SÁU", "THỨ BẢY"];
+    document.getElementById("outDayOfWeek").innerText = weekdays[d.getDay()];
+    document.getElementById("outSolarDay").innerText = d.getDate();
+    
+    // CỐ ĐỊNH ĐỊNH DẠNG VIỆT NAM: DD / MM / YYYY
+    document.getElementById("outSolarMonthYear").innerText = `${d.getDate().toString().padStart(2, '0')} / ${(d.getMonth()+1).toString().padStart(2, '0')} / ${d.getFullYear()}`;
+    document.getElementById("outLunar").innerText = `${lunar.d}/${lunar.m}`;
+    
+    let spirit = document.getElementById("outDaySpirit");
+    spirit.innerText = "Ngày: " + ["Thanh Long","Minh Đường","Thiên Hình","Chu Tước","Kim Quỹ","Bảo Quang","Bạch Hổ","Ngọc Đường","Thiên Lao","Nguyên Vũ","Tư Mệnh","Câu Trận"][thanIdx] + (isHD?" Hoàng Đạo":" Hắc Đạo");
+    spirit.className = "day-status " + (isHD?"hoang-dao-text":"hac-dao-text");
+
+    document.getElementById("outYearCC").innerText = yearCC;
+    document.getElementById("outYearNapAm").innerText = NAP_AM_MAP[yearCC] || "";
+    document.getElementById("outMonthCC").innerText = CAN[(lunar.y*12+lunar.m+3)%10] + " " + CHI[(lunar.m+1)%12];
+    document.getElementById("outDayCC").innerText = dayCC;
+    document.getElementById("outDayNapAm").innerText = NAP_AM_MAP[dayCC] || "";
+
+    document.getElementById("outTruc").innerText = "Trực: " + trucName;
+    document.getElementById("outTietKhi").innerText = "Tiết: " + TIET_KHI_ARR[floor(sunDeg / 15)];
+    document.getElementById("outSeason").innerText = "Mùa: " + season;
+
+    const GIO_KHUNG = {"Tý":"23-01","Sửu":"01-03","Dần":"03-05","Mão":"05-07","Thìn":"07-09","Tỵ":"09-11","Ngọ":"11-13","Mùi":"13-15","Thân":"15-17","Dậu":"17-19","Tuất":"19-21","Hợi":"21-23"};
+    const GIO_RULES = {"Tý":["Tý","Sửu","Mão","Ngọ","Thân","Dậu"],"Sửu":["Dần","Mão","Tỵ","Thân","Tuất","Hợi"],"Dần":["Tý","Sửu","Thìn","Tỵ","Mùi","Tuất"],"Mão":["Tý","Dần","Mão","Ngọ","Mùi","Dậu"],"Thìn":["Dần","Thìn","Tỵ","Thân","Dậu","Hợi"],"Tỵ":["Sửu","Thìn","Ngọ","Mùi","Tuất","Hợi"],"Ngọ":["Tý","Sửu","Mão","Ngọ","Thân","Dậu"],"Mùi":["Dần","Mão","Tỵ","Thân","Tuất","Hợi"],"Thân":["Tý","Sửu","Thìn","Tỵ","Mùi","Tuất"],"Dậu":["Tý","Dần","Mão","Ngọ","Mùi","Dậu"],"Tuất":["Dần","Thìn","Tỵ","Thân","Dậu","Hợi"],"Hợi":["Sửu","Thìn","Ngọ","Mùi","Tuất","Hợi"]};
+    document.getElementById("outZodiac").innerHTML = GIO_RULES[dChi].map(h => `<div class="zodiac-item">${h}(${GIO_KHUNG[h]})</div>`).join("");
+
+    // Rating
+    let totalScore = 0;
+    let ratHtml = "";
+    JOB_LIST.forEach(job => {
+        let jobScore = calculateStarsScore(job, { isHD, truc: trucName, goodS: gS, badS: bS });
+        totalScore += jobScore;
+        ratHtml += `<div class="rating-item"><span class="rating-label">${job.n}</span><span class="stars">${renderStars(jobScore)}</span></div>`;
+    });
+    document.getElementById("jobRatings").innerHTML = ratHtml;
+
+    let avg = Math.round(totalScore / JOB_LIST.length);
+    document.getElementById("starGeneral").innerHTML = renderStars(avg);
+    const comments = ["Rất xấu", "Xấu", "Xấu vừa", "Trung bình", "Tốt vừa", "Tốt", "Rất tốt"];
+    document.getElementById("txtGeneral").innerText = comments[avg];
+    document.getElementById("adviceGeneral").innerText = avg >= 4 ? "Có thể tiến hành việc quan trọng." : "Nên cẩn trọng việc đại sự.";
+
+    document.getElementById("listGood").innerHTML = gS.map(s => `<div><b>${s}</b></div>`).join("");
+    document.getElementById("listBad").innerHTML = bS.map(s => `<div><b>${s}</b></div>`).join("");
+    
+    // Hướng Hỷ Thần & Tài Thần chuẩn
+    let xh = getXuatHanh(dCan);
+    document.getElementById("outDir").innerHTML = `❤️ Hỷ Thần: <b style="color:#c62828">${xh.hy}</b> | 💰 Tài Thần: <b style="color:#2e7d32">${xh.tai}</b>`;
+}
+
+setToday();  // CÁC HÀM CHUA NGAY RAT TOT RAT XAU
+function getEvaluation(gS, bS) {
+    let evalText = "";
+    let boxColor = "";
+    let textColor = "";
+
+    // Kiểm tra xem có sao "Đại hung" (có dấu **) không
+    const hasGreatBadStar = bS.some(s => s.includes("**"));
+    // Kiểm tra xem có sao "Đại cát" (ví dụ Thiên Xá hoặc sao có dấu **) không
+    const hasGreatGoodStar = gS.some(s => s.includes("**"));
+
+    if (hasGreatBadStar) {
+        evalText = "⚠️ NGÀY RẤT XẤU: Có sao đại hung, trăm việc đều kỵ, nên thận trọng.";
+        boxColor = "#fdecea"; // Màu nền đỏ nhạt
+        textColor = "#d32f2f"; // Màu chữ đỏ
+    } else if (hasGreatGoodStar) {
+        evalText = "🌟 NGÀY RẤT TỐT: Có sao đại cát, thuận lợi cho khởi sự, khai trương, cưới hỏi.";
+        boxColor = "#e8f5e9"; // Màu nền xanh nhạt
+        textColor = "#2e7d32"; // Màu chữ xanh
+    } else if (bS.length > gS.length + 2) {
+        evalText = "❌ NGÀY XẤU: Nhiều sao xấu hội tụ, nên hạn chế làm các việc đại sự.";
+        boxColor = "#fff3e0"; // Màu nền cam nhạt
+        textColor = "#e65100";
+    } else if (gS.length > bS.length) {
+        evalText = "✅ NGÀY TỐT: Các sao tốt chiếm ưu thế, có thể tiến hành các việc thường nhật.";
+        boxColor = "#e3f2fd"; // Màu nền xanh dương nhạt
+        textColor = "#1565c0";
+    } else {
+        evalText = "⚖️ NGÀY BÌNH THƯỜNG: Sao tốt và xấu cân bằng, nên làm việc thiện, tránh tranh chấp.";
+        boxColor = "#f5f5f5"; // Màu nền xám nhạt
+        textColor = "#616161";
+    }
+
+    // Hiển thị ra màn hình
+    const box = document.getElementById("evaluation-box");
+    box.innerHTML = evalText;
+    box.style.backgroundColor = boxColor;
+    box.style.color = textColor;
+}
+
+// Gọi hàm này sau khi đã lọc xong gS và bS
+getEvaluation(gS, bS);
+// Chống chuột phải
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Chống các phím tắt F12, Ctrl+Shift+I, Ctrl+U (Xem code)
+    document.onkeydown = function(e) {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+            return false;
+        }
+    };
+</script>
+</body>
+</html>
+
+

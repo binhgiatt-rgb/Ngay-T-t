@@ -86,39 +86,36 @@ body{
 -o-user-select: none;
 user-select: none;
 }
-</style><script type=”text/JavaScript”>
-function killCopy(e){
-return false
-}
-function reEnable(){
-return true
-}
-document.onselectstart=new Function (“return false”)
-if (window.sidebar){
-document.onmousedown=killCopy
-document.onclick=reEnable
-}
+</style>
 </script>
 <script language="JavaScript">
     window.onload = function() {
-    // Lấy thời gian thực từ máy tính/điện thoại khách hàng
-    const today = new Date();
-    const d = today.getDate();
-    const m = today.getMonth() + 1;
-    const y = today.getFullYear();
+        try {
+            // 1. Lấy giờ Việt Nam (UTC+7)
+            const now = new Date();
+            const vnTime = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Ho_Chi_Minh',
+                year: 'numeric', month: '2-digit', day: '2-digit'
+            }).format(now);
+            
+            // vnTime sẽ là "dd/mm/yyyy" -> cần đổi thành "yyyy-mm-dd" cho input date
+            const [d, m, y] = vnTime.split('/');
+            const formattedDate = `${y}-${m}-${d}`;
 
-    // Cập nhật giá trị vào các ô nhập liệu trên giao diện
-    // (Hãy đảm bảo ID 'input-ngay', 'input-thang'... khớp với ID của bạn)
-    if(document.getElementById('input-ngay')) document.getElementById('input-ngay').value = d;
-    if(document.getElementById('input-thang')) document.getElementById('input-thang').value = m;
-    if(document.getElementById('input-nam')) document.getElementById('input-nam').value = y;
+            // 2. Điền vào ô solarDate (QUAN TRỌNG: ID phải khớp với HTML)
+            const dateInput = document.getElementById('solarDate');
+            if (dateInput) {
+                dateInput.value = formattedDate;
+            }
 
-    // Chạy hàm tính toán chính để hiện kết quả ngày hôm nay ngay lập tức
-    main(); 
-};
-
+            // 3. Gọi hàm main để chạy
+            if (typeof main === "function") main();
+            
+        } catch (e) {
+            console.error("Lỗi khởi tạo ngày:", e);
+        }
+    };
 </script>
-
 </head>
 <body>
 

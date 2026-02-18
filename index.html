@@ -297,7 +297,7 @@ const NAP_AM_MAP = {
 const STAR_DB = {
     good: [
         {n: "Thiên Xá**: Tốt tế tự, giải oan", c: "Tốt tế tự, giải oan", l: ["Mậtrungu","Mậu","Mậu","Giáp"," ","Giáp","Mậu","Mậu","Mậu","Giáp"," ","Giáp"]},
-        {n: "Đại An: Bình an-tài lộc", c: "Tốt. Mọi việc bình an, ổn định, cầu tài lộc thuận lợi.", isLucDieu: true, val: 1},
+        
         {n: "Thiên Xá**: Tốt tế tự, giải oan", c: "Tốt tế tự, giải oan", l: ["Dần","Dần","Dần","Ngtrungọ"," ","Ngọ","Thân","Thân","Thân","Tý"," ","Tý"]},
         {n: "Nguyệt Không: Tốt làm nhà, làm giường", c: "Tốt làm nhà, làm giường", l: ["Nhâm","Canh","Bính","Giáp","Nhâm","Canh","Bính","Giáp","Nhâm","Canh","Bính","Giáp"]},
         {n: "Thiên đức*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Đinh","Thân","Nhâm","Tân","Hợi","Giáp","Quý","Dần","Bính","Ất","Tỵ","Canh"]},
@@ -341,8 +341,8 @@ const STAR_DB = {
         {n: "Tam Hợp**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ"]},
         {n: "Tam Hợp**: Tốt mọi việc", c: "Tốt mọi việc", l: ["Tuất","Hợi","Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu"]},
         {n: "Lục Hợp*: Tốt mọi việc", c: "Tốt mọi việc", l: ["Hợi","Tuất","Dậu","Thân","Mùi","Ngọ","Tỵ","Thìn","Mão","Dần","Sửu","Tý"]},
-        {n: "Mẫu Thương*: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Hợi","Hợi","Hợi","Dần","Dần","Dần","Thìn","Thìn","Thìn","Thân","Thân","Thân"]},
-        {n: "Mẫu Thương*: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Tý","Tý","Tý","Mão","Mão","Mão","Sửu","Sửu","Sửu","Dậu","Dậu","Dậu"]},
+        {n: "Mẫu Thương: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Hợi","Hợi","Hợi","Dần","Dần","Dần","Thìn","Thìn","Thìn","Thân","Thân","Thân"]},
+        {n: "Mẫu Thương: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Tý","Tý","Tý","Mão","Mão","Mão","Sửu","Sửu","Sửu","Dậu","Dậu","Dậu"]},
         {n: "Phúc hậu: Tốt cầu tài, khai trương", c: "Tốt cầu tài, khai trương", l: ["Dần","Dần","Dần","Tỵ","Tỵ","Tỵ","Thân","Thân","Thân","Hợi","Hợi","Hợi"]},
         {n: "Đại Hồng Sa: Tốt mọi việc", c: "Tốt mọi việc", l: ["Tý","Tý","Tý","Thìn","Thìn","Thìn","Ngọ","Ngọ","Ngọ","Thân","Thân","Thân"]},
         {n: "Đại Hồng Sa: Tốt mọi việc", c: "Tốt mọi việc", l: ["Sửu","Sửu","Sửu","Tỵ","Tỵ","Tỵ","Mùi","Mùi","Mùi","Tuất","Tuất","Tuất"]},
@@ -352,18 +352,7 @@ const STAR_DB = {
         {n: "Minh đường*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi"]},
         {n: "Kim đường*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão"]},
         {n: "Ngọc đường*: Tốt mọi việc", c: "Hoàng Đạo - Tốt mọi việc", l: ["Mùi","Dậu","Hợi","Sửu","Mão","Tỵ","Mùi","Dậu","Hợi","Sửu","Mão","Tỵ"]},
-{
-    n: "Tốc Hỷ: Tin vui, cầu tài lộc",
-    c: "Tốt. Tin vui đến nhanh, cầu tài lộc, gặp gỡ đối tác thuận lợi (buổi sáng tốt hơn).",
-    isLucDieu: true,
-    val: 3 // Vị trí số 3
-},
-{
-    n: "Tiểu Cát: May mắn nhỏ, việc trôi chảy",
-    c: "Tốt. Gặp may mắn nhỏ, mọi việc trôi chảy, có quý nhân phù trợ.",
-    isLucDieu: true,
-    val: 5 // Vị trí số 5
-},
+
     ],
    bad: [
     {
@@ -384,24 +373,14 @@ const STAR_DB = {
     c: "Xấu. Gặp nhiều trở ngại, mưu sự khó thành, dễ bị hao tán tài lộc.",
     l: ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"]
 },
-    {
-    n: "Không Vong (Sát)*", 
-    c: "Xấu mọi việc, mưu sự khó thành.",
-    isLucDieu: true,
-    val: 6 // Vị trí cuối cùng trong vòng Lục Diệu
-}, 
+    
 {
     n: "Xích Khẩu*: Dễ tranh cãi, thị phi",
     c: "Xấu. Dễ xảy ra tranh cãi, miệng tiếng, thị phi, đề phòng mâu thuẫn.",
     isLucDieu: true, // Đánh dấu để dùng hàm tính riêng
     val: 4 // Vị trí số 4 trong vòng Lục Diệu
 },
-{
-    n: "Lưu Niên: Xấu mọi việc, trì hoãn",
-    c: "Xấu. Mọi việc dễ bị trì hoãn, dây dưa, khó dứt điểm, nên kiên nhẫn.",
-    isLucDieu: true,
-    val: 2 // Vị trí số 2
-},
+
         {n: "Thiên Lại: Xấu mọi việc", c: "Xấu mọi việc", l: ["Dậu","Ngọ","Mão","Tý","Dậu","Ngọ","Mão","Tý","Dậu","Ngọ","Mão","Tý"]},
         {n: "Thiên Ngục: Xấu mọi việc (Lợp nhà)", c: "Xấu mọi việc (Lợp nhà)", l: ["Tý","Mão","Ngọ","Dậu","Tý","Mão","Ngọ","Dậu","Tý","Mão","Ngọ","Dậu"]},
         {n: "Tiểu Hồng Sa: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Dậu","Sửu","Tỵ","Dậu","Sửu","Tỵ","Dậu","Sửu","Tỵ","Dậu","Sửu"]},
@@ -415,9 +394,9 @@ const STAR_DB = {
         {n: "Thổ ôn: Kỵ xây dựng, đào ao", c: "Kỵ xây dựng, đào ao", l: ["Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu","Dần","Mão"]},
         {n: "Thiên ôn: Kỵ xây dựng", c: "Kỵ xây dựng", l: ["Mùi","Tuất","Thìn","Dần","Ngọ","Tý","Dậu","Thân","Tỵ","Hợi","Tý","Sửu"]},
         {n: "Thụ tử**: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tuất","Thìn","Hợi","Tỵ","Tý","Ngọ","Sửu","Mùi","Dần","Thân","Mão","Dậu"]},
-        {n: "Hoang vu*: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tỵ","Tỵ","Thân","Thân","Thân","Hợi","Hợi","Hợi","Dần","Dần","Dần"]},
-        {n: "Hoang vu*: Xấu mọi việc", c: "Xấu mọi việc", l: ["Dậu","Dậu","Dậu","Tý","Tý","Tý","Mão","Mão","Mão","Ngọ","Ngọ","Ngọ"]},
-        {n: "Hoang vu*: Xấu mọi việc", c: "Xấu mọi việc", l: ["Sửu","Sửu","Sửu","Thìn","Thìn","Thìn","Mùi","Mùi","Mùi","Tuất","Tuất","Tuất"]},
+        {n: "Hoang vu: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tỵ","Tỵ","Thân","Thân","Thân","Hợi","Hợi","Hợi","Dần","Dần","Dần"]},
+        {n: "Hoang vu: Xấu mọi việc", c: "Xấu mọi việc", l: ["Dậu","Dậu","Dậu","Tý","Tý","Tý","Mão","Mão","Mão","Ngọ","Ngọ","Ngọ"]},
+        {n: "Hoang vu: Xấu mọi việc", c: "Xấu mọi việc", l: ["Sửu","Sửu","Sửu","Thìn","Thìn","Thìn","Mùi","Mùi","Mùi","Tuất","Tuất","Tuất"]},
         {n: "Thiên tặc: Xấu khởi tạo, động thổ", c: "Xấu khởi tạo, động thổ", l: ["Thìn","Dậu","Dần","Mùi","Tý","Tỵ","Tuất","Mão","Thân","Sửu","Ngọ","Hợi"]},
         {n: "Địa Tặc: Xấu khởi tạo, an táng", c: "Xấu khởi tạo, an táng", l: ["Sửu","Tý","Hợi","Tuất","Dậu","Thân","Mùi","Ngọ","Tỵ","Thìn","Mão","Dần"]},
         {n: "Hoả tai: Xấu làm nhà, lợp nhà", c: "Xấu làm nhà, lợp nhà", l: ["Sửu","Mùi","Dần","Thân","Mão","Dậu","Thìn","Tuất","Tỵ","Hợi","Ngọ","Tý"]},
@@ -446,14 +425,13 @@ const STAR_DB = {
         {n: "Nguyệt Hình: Xấu mọi việc", c: "Xấu mọi việc", l: ["Tỵ","Tý","Thìn","Thân","Ngọ","Sửu","Dần","Dậu","Mùi","Hợi","Mão","Tuất"]},
         {n: "Tội chỉ: Xấu với tế tự, tố tụng", c: "Xấu với tế tự, kiện cáo", l: ["Ngọ","Tý","Mùi","Sửu","Thân","Dần","Dậu","Mão","Tuất","Thìn","Hợi","Tỵ"]},
         {n: "Nguyệt Kiến: Kỵ động thổ", c: "Kỵ động thổ", l: ["Mão", "", "", "Ngọ", "", "", "Dậu", "", "", "Tý", "", ""]},
-        {n: "Thiên địa chính chuyển: Kỵ động thổ", c: "Kỵ động thổ", l: ["Quý Mão", "", "", "Bính Ngọ", "", "", "Đinh Dậu", "", "", "Canh Tý", "", ""]},
-        {n: "Thiên địa chuyển sát: Kỵ động thổ", c: "Kỵ động thổ", l: ["Ất Mão", "", "", "Bính Ngọ", "", "", "Tân Dậu", "", "", "Nhâm Tý", "", ""]},
+     
         {n: "Lỗ ban sát: Kỵ khởi tạo", c: "Kỵ khởi tạo", l: ["Tý", "", "", "Mão", "", "", "Ngọ", "", "", "Dậu", "", ""]},
         {n: "Phủ đầu sát: Kỵ khởi tạo", c: "Kỵ khởi tạo", l: ["Thìn", "", "", "Mùi", "", "", "Dậu", "", "", "Tý", "", ""]},
         {n: "Tam tang: Kỵ khởi tạo, giá thú", c: "Kỵ khởi tạo, giá thú", l: ["Thìn", "", "", "Mùi", "", "", "Tuất", "", "", "Sửu", "", ""]},
         {n: "Ngũ hư: Kỵ khởi tạo, giá thú", c: "Kỵ khởi tạo, giá thú", l: ["Tỵ", "Dậu", "Sửu", "Thân", "Tý", "Thìn", "Hợi", "Mão", "Mùi", "Dần", "Ngọ", "Tuất"]},
-        {n: "Tứ thời đại mộ: Kỵ an táng", c: "Kỵ an táng", l: ["Ất Mùi", "", "", "Bính Tuất", "", "", "Tân Sửu", "", "", "Nhâm Thìn", "", ""]},
-        {n: "Thổ cẩm: Kỵ xây dựng, an táng", c: "Kỵ xây dựng, an táng", l: ["Hợi", "", "", "Dần", "", "", "Tỵ", "", "", "Thân", "", ""]},
+       
+        
         {n: "Ly sàng: Kỵ giá thú", c: "Kỵ giá thú", l: ["Dậu", "", "", "Dần", "", "", "Tuất", "", "", "Tỵ", "", ""]},
         {n: "Ly sàng: Kỵ giá thú", c: "Kỵ giá thú", l: ["", "", "", "Ngọ", "", "", "", "", "", "", "", ""]},
         {n: "Tứ thời cô quả: Kỵ giá thú", c: "Kỵ giá thú", l: ["Sửu", "", "", "Thìn", "", "", "Mùi", "", "", "Tuất", "", ""]},

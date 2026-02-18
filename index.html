@@ -89,32 +89,32 @@ user-select: none;
 </style>
 </script>
 <script language="JavaScript">
-    window.onload = function() {
-        try {
-            // 1. Lấy giờ Việt Nam (UTC+7)
-            const now = new Date();
-            const vnTime = new Intl.DateTimeFormat('en-GB', {
-                timeZone: 'Asia/Ho_Chi_Minh',
-                year: 'numeric', month: '2-digit', day: '2-digit'
-            }).format(now);
-            
-            // vnTime sẽ là "dd/mm/yyyy" -> cần đổi thành "yyyy-mm-dd" cho input date
-            const [d, m, y] = vnTime.split('/');
-            const formattedDate = `${y}-${m}-${d}`;
+    window.onload = async function() {
+    let now;
+    try {
+        // Thử lấy thời gian thực từ internet (độ chính xác tuyệt đối)
+        const response = await fetch('https://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh');
+        const data = await response.json();
+        now = new Date(data.datetime);
+    } catch (e) {
+        // Nếu không có mạng hoặc lỗi API, quay lại dùng giờ máy tính làm dự phòng
+        now = new Date();
+    }
 
-            // 2. Điền vào ô solarDate (QUAN TRỌNG: ID phải khớp với HTML)
-            const dateInput = document.getElementById('solarDate');
-            if (dateInput) {
-                dateInput.value = formattedDate;
-            }
+    const vnTime = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(now);
 
-            // 3. Gọi hàm main để chạy
-            if (typeof main === "function") main();
-            
-        } catch (e) {
-            console.error("Lỗi khởi tạo ngày:", e);
-        }
-    };
+    const [d, m, y] = vnTime.split('/');
+    const formattedDate = `${y}-${m}-${d}`;
+
+    const dateInput = document.getElementById('solarDate');
+    if (dateInput) {
+        dateInput.value = formattedDate;
+        if (typeof main === "function") main();
+    }
+}
 </script>
 </head>
 <body>
@@ -463,7 +463,24 @@ function adjustDay(v) {
     d.setDate(d.getDate() + v);
     document.getElementById("solarDate").valueAsDate = d; main();
 }
-function setToday() { document.getElementById("solarDate").valueAsDate = new Date(); main(); }
+function setToday() {
+    // Lấy thời gian hiện tại theo đúng múi giờ Asia/Ho_Chi_Minh
+    const now = new Date();
+    const vnTime = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(now);
+
+    // vnTime trả về định dạng "dd/mm/yyyy", ta cần đổi lại thành "yyyy-mm-dd" cho input
+    const [d, m, y] = vnTime.split('/');
+    const formattedDate = `${y}-${m}-${d}`;
+
+    const dateInput = document.getElementById('solarDate');
+    if (dateInput) {
+        dateInput.value = formattedDate;
+        main(); // Chạy lại hàm main để cập nhật kết quả
+    }
+}
 
 function main() {
     let val = document.getElementById("solarDate").value; if(!val) return;
